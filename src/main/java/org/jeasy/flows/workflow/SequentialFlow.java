@@ -97,6 +97,16 @@ public class SequentialFlow extends AbstractWorkFlow {
             return this;
         }
 
+        public SequentialFlow.Builder execute(List<Work> works) {
+            this.works.addAll(works);
+            return this;
+        }
+
+        public SequentialFlow.Builder then(List<Work> works) {
+            this.works.addAll(works);
+            return this;
+        }
+
         public SequentialFlow build() {
             return new SequentialFlow(name, works);
         }
