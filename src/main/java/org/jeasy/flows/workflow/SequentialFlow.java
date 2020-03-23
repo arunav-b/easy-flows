@@ -37,7 +37,7 @@ import static org.jeasy.flows.work.WorkStatus.FAILED;
 
 /**
  * A sequential flow executes a set of work units in sequence.
- * <p>
+ *
  * If a init of work fails, next work units in the pipeline will be skipped.
  *
  * @author Mahmoud Ben Hassine (mahmoud.benhassine@icloud.com)
@@ -92,18 +92,8 @@ public class SequentialFlow extends AbstractWorkFlow {
             return this;
         }
 
-        public SequentialFlow.Builder execute(List<Work> works) {
-            this.works.addAll(works);
-            return this;
-        }
-
         public SequentialFlow.Builder then(Work work) {
             this.works.add(work);
-            return this;
-        }
-
-        public SequentialFlow.Builder then(List<Work> works) {
-            this.works.addAll(works);
             return this;
         }
 

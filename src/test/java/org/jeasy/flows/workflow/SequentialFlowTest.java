@@ -29,9 +29,6 @@ import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SequentialFlowTest {
 
     @Test
@@ -56,38 +53,6 @@ public class SequentialFlowTest {
         inOrder.verify(work1, Mockito.times(1)).call(workContext);
         inOrder.verify(work2, Mockito.times(1)).call(workContext);
         inOrder.verify(work3, Mockito.times(1)).call(workContext);
-    }
-
-    @Test
-    public void callList() {
-        // given
-        Work work1 = Mockito.mock(Work.class);
-        Work work2 = Mockito.mock(Work.class);
-        Work work3 = Mockito.mock(Work.class);
-        Work work4 = Mockito.mock(Work.class);
-        List<Work> worksExecute = new ArrayList<>();
-        List<Work> worksThen = new ArrayList<>();
-        worksExecute.add(work1);
-        worksExecute.add(work3);
-        worksThen.add(work2);
-        worksThen.add(work4);
-
-        WorkContext workContext = Mockito.mock(WorkContext.class);
-        SequentialFlow sequentialFlow = SequentialFlow.Builder.aNewSequentialFlow()
-                .named("testSequentialFlowList")
-                .execute(worksExecute)
-                .then(worksThen)
-                .build();
-
-        // when
-        sequentialFlow.call(workContext);
-
-        // then
-        InOrder inOrder = Mockito.inOrder(work1, work3, work2, work4);
-        inOrder.verify(work1, Mockito.times(1)).call(workContext);
-        inOrder.verify(work3, Mockito.times(1)).call(workContext);
-        inOrder.verify(work2, Mockito.times(1)).call(workContext);
-        inOrder.verify(work4, Mockito.times(1)).call(workContext);
     }
 
 }
